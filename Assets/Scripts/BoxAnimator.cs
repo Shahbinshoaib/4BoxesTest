@@ -15,10 +15,10 @@ public class BoxAnimator : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void AnimateTo(float target)
+    public void AnimateTo(Vector2 target)
     {
         startSize = rectTransform.sizeDelta;
-        targetSize = new Vector2(target, target) ;
+        targetSize = target;
         elapsed = 0f;
         animating = true;
     }

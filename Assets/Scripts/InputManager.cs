@@ -7,8 +7,13 @@ public class InputManager : MonoBehaviour
     public BoxAnimator blueBox;
     public BoxAnimator yellowBox;
 
-    float focusedScale = 352;
-    float normalScale = 220;
+    float normalScale = 450;
+
+    Vector2 largeScale ;
+    Vector2 sideScale ;
+    Vector2 bottomScale ;
+    Vector2 cornerScale ;
+
 
     void Update()
     {
@@ -20,9 +25,42 @@ public class InputManager : MonoBehaviour
 
     void Focus(BoxAnimator target)
     {
-        redBox.AnimateTo(target == redBox ? focusedScale : normalScale);
-        greenBox.AnimateTo(target == greenBox ? focusedScale : normalScale);
-        blueBox.AnimateTo(target == blueBox ? focusedScale : normalScale);
-        yellowBox.AnimateTo(target == yellowBox ? focusedScale : normalScale);
+
+        largeScale = new Vector2(normalScale * 0.8f, normalScale * 0.8f);
+        sideScale = new Vector2(normalScale * 0.2f, normalScale * 0.8f);
+        bottomScale = new Vector2(normalScale * 0.8f, normalScale * 0.2f);
+        cornerScale = new Vector2(normalScale * 0.2f, normalScale * 0.2f);
+
+
+        switch (target)
+        {
+            case BoxAnimator b when b == redBox:
+                redBox.AnimateTo(largeScale);
+                greenBox.AnimateTo(sideScale);
+                blueBox.AnimateTo(bottomScale);
+                yellowBox.AnimateTo(cornerScale);
+                break;
+
+            case BoxAnimator b when b == greenBox:
+                redBox.AnimateTo(sideScale);
+                greenBox.AnimateTo(largeScale);
+                blueBox.AnimateTo(cornerScale);
+                yellowBox.AnimateTo(bottomScale);
+                break;
+
+            case BoxAnimator b when b == blueBox:
+                redBox.AnimateTo(bottomScale);
+                greenBox.AnimateTo(cornerScale);
+                blueBox.AnimateTo(largeScale);
+                yellowBox.AnimateTo(sideScale);
+                break;
+
+            case BoxAnimator b when b == yellowBox:
+                redBox.AnimateTo(cornerScale);
+                greenBox.AnimateTo(bottomScale);
+                blueBox.AnimateTo(sideScale);
+                yellowBox.AnimateTo(largeScale);
+                break;
+        }
     }
 }
