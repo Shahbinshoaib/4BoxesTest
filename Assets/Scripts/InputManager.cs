@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public BoxAnimator blueBox;
     public BoxAnimator yellowBox;
 
+
     float normalScale = 450;
 
     Vector2 largeScale ;
@@ -26,10 +27,10 @@ public class InputManager : MonoBehaviour
     void Focus(BoxAnimator target)
     {
 
-        largeScale = new Vector2(normalScale * 0.8f, normalScale * 0.8f);
-        sideScale = new Vector2(normalScale * 0.2f, normalScale * 0.8f);
-        bottomScale = new Vector2(normalScale * 0.8f, normalScale * 0.2f);
-        cornerScale = new Vector2(normalScale * 0.2f, normalScale * 0.2f);
+        largeScale = new Vector2(normalScale * 0.75f, normalScale * 0.75f);
+        sideScale = new Vector2(normalScale * 0.25f, normalScale * 0.75f);
+        bottomScale = new Vector2(normalScale * 0.75f, normalScale * 0.25f);
+        cornerScale = new Vector2(normalScale * 0.25f, normalScale * 0.25f);
 
 
         switch (target)

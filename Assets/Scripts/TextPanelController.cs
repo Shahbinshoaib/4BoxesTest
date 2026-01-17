@@ -6,6 +6,7 @@ public class TextPanelController : MonoBehaviour
     public RectTransform boxRect;
     public TextMeshProUGUI text;
     RectTransform panelRect;
+    public string id;
 
 
     void Awake()
@@ -13,17 +14,27 @@ public class TextPanelController : MonoBehaviour
         panelRect = GetComponent<RectTransform>();
     }
 
-    void LateUpdate()
+    private void Start()
     {
-        panelRect.SetSizeWithCurrentAnchors(
-            RectTransform.Axis.Horizontal,
-            boxRect.rect.width
-        );
+        SetText(id);
     }
 
     public void SetText(string id)
     {
-        text.text = CSVReader.ReadCSV()[id];
+        var data = CSVReader.ReadCSV();
+
+        Debug.Log("Looking for ID: " + id);
+
+        if (data.TryGetValue(id, out string value))
+        {
+            text.text = value;
+        }
+        else
+        {
+            Debug.LogError("ID not found: " + id);
+            text.text = "";
+        }
     }
+
 
 }
