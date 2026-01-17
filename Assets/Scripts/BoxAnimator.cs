@@ -2,27 +2,39 @@ using UnityEngine;
 
 public class BoxAnimator : MonoBehaviour
 {
-    public void AnimateTo(Vector3 targetScale)
+    RectTransform rectTransform;
+
+    Vector2 startSize;
+    Vector2 targetSize;
+    float elapsed;
+    float duration = 1f;
+    bool animating;
+
+    void Awake()
     {
-        startScale = transform.localScale;
-        endScale = targetScale;
+        rectTransform = GetComponent<RectTransform>();
+    }
+
+    public void AnimateTo(float target)
+    {
+        startSize = rectTransform.sizeDelta;
+        targetSize = new Vector2(target, target) ;
         elapsed = 0f;
-        isAnimating = true;
+        animating = true;
     }
 
     void Update()
     {
-        if (!isAnimating) return;
+        if (!animating) return;
 
         elapsed += Time.deltaTime;
         float t = Mathf.Clamp01(elapsed / duration);
-
-        // Sine Ease Out
         float eased = Mathf.Sin(t * Mathf.PI * 0.5f);
 
-        transform.localScale = Vector3.Lerp(startScale, endScale, eased);
+        rectTransform.sizeDelta = Vector2.Lerp(startSize, targetSize, eased);
 
-        if (t >= 1f) isAnimating = false;
+        if (t >= 1f) animating = false;
+
     }
-
 }
+

@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public BoxAnimator redBox;
+    public BoxAnimator greenBox;
+    public BoxAnimator blueBox;
+    public BoxAnimator yellowBox;
 
-    // Update is called once per frame
+    float focusedScale = 352;
+    float normalScale = 220;
+
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R)) Focus(redBox);
+        if (Input.GetKeyDown(KeyCode.G)) Focus(greenBox);
+        if (Input.GetKeyDown(KeyCode.B)) Focus(blueBox);
+        if (Input.GetKeyDown(KeyCode.Y)) Focus(yellowBox);
+    }
+
+    void Focus(BoxAnimator target)
+    {
+        redBox.AnimateTo(target == redBox ? focusedScale : normalScale);
+        greenBox.AnimateTo(target == greenBox ? focusedScale : normalScale);
+        blueBox.AnimateTo(target == blueBox ? focusedScale : normalScale);
+        yellowBox.AnimateTo(target == yellowBox ? focusedScale : normalScale);
     }
 }

@@ -1,16 +1,29 @@
+using TMPro;
 using UnityEngine;
 
 public class TextPanelController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public RectTransform boxRect;
+    public TextMeshProUGUI text;
+    RectTransform panelRect;
+
+
+    void Awake()
     {
-        
+        panelRect = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        panelRect.SetSizeWithCurrentAnchors(
+            RectTransform.Axis.Horizontal,
+            boxRect.rect.width
+        );
     }
+
+    public void SetText(string id)
+    {
+        text.text = CSVReader.ReadCSV()[id];
+    }
+
 }
